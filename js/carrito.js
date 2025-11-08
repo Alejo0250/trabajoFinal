@@ -10,7 +10,7 @@ function Header() {
           <ul className="flex space-x-6 items-center">
             <li>
               <a
-                href="inicio.html"
+                href="index.html"
                 className="text-white hover:text-blue-400 font-medium transition hover:underline"
               >
                 INICIO
