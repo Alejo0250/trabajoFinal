@@ -15,7 +15,7 @@ function ZapatillasCard({ zapatilla, onSelectZapatilla }) {
         <img
           src={`imagenes/zapatillas/${zapatilla.imagen}`} // Ruta dinámica
           alt={zapatilla.nombre}
-          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+          className="w-full h-full object-cover group-hover:scale-120 transition-transform duration-300"
           style={{ zIndex: 1 }}
         />
         <div
