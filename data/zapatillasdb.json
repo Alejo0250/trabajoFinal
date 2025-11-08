@@ -1,0 +1,210 @@
+[
+  {
+    "id": "01",
+    "nombre": "Lomas Miracle Ocean",
+    "marca": "🔺 Lomas",
+    "color": ["🔵Celeste", "🟢Verde"],
+    "talla": "👣 42",
+    "estreno": "📅 28/11/2025",
+    "hora": "🕒 19:30 - 22:00",
+    "precios": "💵 100.00",
+    "moneda": "🪙PEN",
+    "stock": "📈 50",
+    "soldOut": true,
+    "popularidad": "⭐ 85",
+    "imagen": "1.jpg",
+    "galeria": [
+      "1.jpg",
+      "1.1.jpg",
+      "1.2.jpg",
+      "1.3.jpg"
+  ],
+    "politicas": {
+      "edad": "👥 Todas las edades",
+      "reembolso": "♻️ Reembolso hasta 48h antes"
+    },
+    "descripcion": "📗 Con colores verde y celeste fosforescentes. Recomendables para cancha sintética."
+  }, 
+  {
+    "id": "02",
+    "nombre": "Classico Umbro Edition - Azul",
+    "marca": "🧿 Umbro",
+    "color": ["🔵Azul", "🟢Verde", "⚪Blanco"],
+    "talla": "👣 40",
+    "estreno": "📅 20/05/2025",
+    "hora": "🕒 19:30 - 22:00",
+    "precios": "💵 120.00",
+    "moneda": "🪙PEN",
+    "stock": "📈 100",
+    "soldOut": true,
+    "popularidad": "⭐ 92",
+    "imagen": "2.jpg",
+    "galeria": [
+      "2.jpg",
+      "2.1.jpg",
+      "2.2.jpg",
+      "2.3.jpg"
+  ],
+    "politicas": {
+      "edad": "👥 Todas las edades",
+      "reembolso": "♻️ Reembolso hasta 48h antes"
+    },
+    "descripcion": "📗 Calidad + Precio = Classico Umbro Edition - Azul."
+  },
+  {
+    "id": "03",
+    "nombre": "Lomas Miracle Ocean",
+    "marca": "🔺 Lomas",
+    "color": ["🔵Azul", "🟢Verde"],
+    "talla": "👣 41",
+    "estreno": "📅 28/11/2025",
+    "hora": "🕒 19:30 - 22:00",
+    "precios": "💵 100.00",
+    "moneda": "🪙PEN",
+    "stock": "📈 50",
+    "soldOut": true,
+    "popularidad": "⭐ 85",
+    "imagen": "3.jpg",
+    "galeria": [
+      "3.jpg",
+      "3.1.jpg",
+      "3.2.jpg",
+      "3.3.jpg"
+  ],
+    "politicas": {
+      "edad": "👥 Todas las edades",
+      "reembolso": "♻️ Reembolso hasta 48h antes"
+    },
+    "descripcion": "📗 Azul y verde intensos. *El guante no viene incluido*."
+  },
+  {
+    "id": "04",
+    "nombre": "Chimpunes Predator League",
+    "marca": "⚠️ Adidas",
+    "color": ["🩷Rosado", "🟢Verde", "⚪Blanco"],
+    "talla": "👣 43",
+    "estreno": "📅 20/05/2025",
+    "hora": "🕒 19:30 - 22:00",
+    "precios": "💵 120.00",
+    "moneda": "🪙PEN",
+    "stock": "📈 100",
+    "soldOut": true,
+    "popularidad": "⭐ 92",
+    "imagen": "4.jpg",
+    "galeria": [
+      "4.jpg",
+      "4.1.jpg",
+      "4.2.jpg",
+      "4.3.jpg"
+  ],
+    "politicas": {
+      "edad": "👥 Todas las edades",
+      "reembolso": "♻️ Reembolso hasta 48h antes"
+    },
+    "descripcion": "📗 Diseñadas para un control superior y agilidad en césped artificial. ¡Lleva tu juego al siguiente nivel!."    
+  },
+  {
+    "id": "05",
+    "nombre": "Classico Umbro Edition - Negro",
+    "marca": "🧿 Umbro",
+    "color": ["⚫Negro", "⚪Blanco"],
+    "talla": "👣 42",
+    "estreno": "📅 28/11/2025",
+    "hora": "🕒 19:30 - 22:00",
+    "precios": "💵 100.00",
+    "moneda": "🪙PEN",
+    "stock": "📈 50",
+    "soldOut": true,
+    "popularidad": "⭐ 85",
+    "imagen": "5.jpg",
+    "galeria": [
+      "5.jpg",
+      "5.1.jpg",
+      "5.2.jpg",
+      "5.3.jpg"
+  ],
+    "politicas": {
+      "edad": "👥 Todas las edades",
+      "reembolso": "♻️ Reembolso hasta 48h antes"
+    },
+    "descripcion": "📗 +1000 de Aura para quien porte estas zapatillas."
+  },
+  {
+    "id": "06",
+    "nombre": "Technicolor",
+    "marca": "🔺 Lomas",
+    "color": ["🔴Rojo", "🔵Azul", "🟢Verde", "⚪Blanco"],
+    "talla": "👣 43",
+    "estreno": "📅 20/05/2025",
+    "hora": "🕒 19:30 - 22:00",
+    "precios": "💵 120.00",
+    "moneda": "🪙PEN",
+    "stock": "📈 100",
+    "soldOut": true,
+    "popularidad": "⭐ 92",
+    "imagen": "6.jpg",
+    "galeria": [
+      "6.jpg",
+      "6.1.jpg",
+      "6.2.jpg",
+      "6.3.jpg"
+  ],
+    "politicas": {
+      "edad": "👥 Todas las edades",
+      "reembolso": "♻️ Reembolso hasta 48h antes"
+    },
+    "descripcion": "📗 Una zapatilla simple, pero con muchos colores... la llamaremos Technicolor."
+  },
+  {
+    "id": "07",
+    "nombre": "Mercurial Superfly V Portugal",
+    "marca": "✅ Nike",
+    "color": ["🔴Rojo", "🟢Verde", "🟡Dorado"],
+    "talla": "👣 42",
+    "estreno": "📅 28/11/2025",
+    "hora": "🕒 19:30 - 22:00",
+    "precios": "💵 100.00",
+    "moneda": "🪙PEN",
+    "stock": "📈 50",
+    "soldOut": true,
+    "popularidad": "⭐ 85",
+    "imagen": "7.jpg",
+    "galeria": [
+      "7.jpg",
+      "7.1.jpg",
+      "7.2.jpg",
+      "7.3.jpg"
+  ],
+    "politicas": {
+      "edad": "👥 Todas las edades",
+      "reembolso": "♻️ Reembolso hasta 48h antes"
+    },
+    "descripcion": "📗 EDICIÓN LIMITADA: A CR7 por ganar la UEFA Euro 2016."
+  },
+  {
+    "id": "08",
+    "nombre": "X Speedportal",
+    "marca": "⚠️ Adidas",
+    "color": ["🔵Celeste", "⚪Blanco", "🟡Dorado"],
+    "talla": "👣 42",
+    "estreno": "📅 20/05/2025",
+    "hora": "🕒 19:30 - 22:00",
+    "precios": "💵 120.00",
+    "moneda": "🪙PEN",
+    "stock": "📈 100",
+    "soldOut": true,
+    "popularidad": "⭐ 92",
+    "imagen": "8.jpg",
+    "galeria": [
+      "8.jpg",
+      "8.1.jpg",
+      "8.2.jpg",
+      "8.3.jpg"
+  ],
+    "politicas": {
+      "edad": "👥 Todas las edades",
+      "reembolso": "♻️ Reembolso hasta 48h antes"
+    },
+    "descripcion": "📗 EDICIÓN LIMITADA: Exclusivas para Messi por participar en el Mundial de Qatar 2022. *Terminó ganando*."
+ }
+]

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>INICIO</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6.26.0/babel.min.js"></script>
+    <link rel="stylesheet" href="css/styles.css" />
+    <style>
+      /* Forzar la misma pila sans que usa Tailwind/header.js */
+      body {
+        font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif !important;
+      }
+    </style>
+  </head>
+
+  <body class="bg-gray-900 text-white">
+    <div id="header"></div>
+
+  <!-- HERO SECTIONS -->
+  <main class="space-y-0">
+      <a href="zapatillas.html" class="block">
+        <section
+          class="relative h-64 md:h-96 lg:h-[420px] bg-cover bg-center flex items-center justify-center"
+          style="background-image: url('imagenes/zapatillas/3.jpg')"
+        >
+          <div class="absolute inset-0 bg-black/50"></div>
+          <h2 class="relative text-3xl md:text-5xl font-bold tracking-wider uppercase">
+            ZAPATILLAS
+          </h2>
+        </section>
+      </a>
+
+      <a href="camisetas.html" class="block">
+        <section
+          class="relative h-64 md:h-96 lg:h-[420px] bg-cover bg-center flex items-center justify-center"
+          style="background-image: url('imagenes/camisetas/12.3.jpg')"
+        >
+          <div class="absolute inset-0 bg-black/45"></div>
+          <h2 class="relative text-3xl md:text-5xl font-bold tracking-wider uppercase">
+            CAMISETAS
+          </h2>
+        </section>
+      </a>
+
+      <a href="accesorios.html" class="block">
+        <section
+          class="relative h-64 md:h-96 lg:h-[420px] bg-cover bg-center flex items-center justify-center"
+          style="background-image: url('imagenes/accesorios/19.jpg')"
+        >
+          <div class="absolute inset-0 bg-black/45"></div>
+          <h2 class="relative text-3xl md:text-5xl font-bold tracking-wider uppercase">
+            ACCESORIOS
+          </h2>
+        </section>
+      </a>
+    </main>
+
+    <script type="text/babel" src="js/header.js"></script>
+  </body>
+</html>

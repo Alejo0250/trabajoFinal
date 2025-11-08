@@ -1,0 +1,123 @@
+[
+  {
+    "id": "09",
+    "nombre": "Alianza Lima",
+    "marca": "✅ Nike",
+    "color": ["⚫Negro", "⚪Blanco"],
+    "talla": "👕 S",
+    "estreno": "📅 28/11/2025",
+    "hora": "🕒 19:30 - 22:00",
+    "precios": "💵 100.00",
+    "moneda": "🪙PEN",
+    "stock": "📈 50",
+    "soldOut": true,
+    "popularidad": "⭐ 82",
+    "imagen": "9.jpg",
+    "galeria": [
+      "9.jpg"
+  ],
+    "politicas": {
+      "edad": "👥 Todas las edades",
+      "reembolso": "♻️ Reembolso hasta 48h antes"
+    },
+    "descripcion": "📗 Camiseta de Alianza Lima."
+  }, 
+  {
+    "id": "10",
+    "nombre": "Cristal",
+    "marca": "⚠️ Adidas",
+    "color": ["🔵Celeste", "⚪Blanco"],
+    "talla": "👕 M",
+    "estreno": "📅 20/05/2025",
+    "hora": "🕒 19:30 - 22:00",
+    "precios": "💵 120.00",
+    "moneda": "🪙PEN",
+    "stock": "📈 100",
+    "soldOut": true,
+    "popularidad": "⭐ 75",
+    "imagen": "10.jpg",
+    "galeria": [
+      "10.jpg"
+  ],
+    "politicas": {
+      "edad": "👥 Todas las edades",
+      "reembolso": "♻️ Reembolso hasta 48h antes"
+    },
+    "descripcion": "📗 Camiseta de Cristal."
+  },
+  {
+    "id": "11",
+    "nombre": "Universitario",
+    "marca": "👟 Marathon",
+    "color": ["🔵Azul", "🟢Verde"],
+    "talla": "👕 L",
+    "estreno": "📅 28/11/2025",
+    "hora": "🕒 19:30 - 22:00",
+    "precios": "💵 100.00",
+    "moneda": "🪙PEN",
+    "stock": "📈 50",
+    "soldOut": true,
+    "popularidad": "⭐ 91",
+    "imagen": "11.jpg",
+    "galeria": [
+      "11.jpg"
+  ],
+    "politicas": {
+      "edad": "👥 Todas las edades",
+      "reembolso": "♻️ Reembolso hasta 48h antes"
+    },
+    "descripcion": "📗 Camiseta de Universitario Deportes."
+  },
+  {
+    "id": "12",
+    "nombre": "Portugal",
+    "marca": "✅ Nike",
+    "color": ["🔴Rojo", "🟢Verde", "🟡Dorado"],
+    "talla": "👕 XL",
+    "estreno": "📅 20/05/2025",
+    "hora": "🕒 19:30 - 22:00",
+    "precios": "💵 120.00",
+    "moneda": "🪙PEN",
+    "stock": "📈 100",
+    "soldOut": true,
+    "popularidad": "⭐ 100",
+    "imagen": "12.jpg",
+    "galeria": [
+      "12.jpg",
+      "12.1.jpg",
+      "12.2.jpg",
+      "12.3.jpg"
+  ],
+    "politicas": {
+      "edad": "👥 Todas las edades",
+      "reembolso": "♻️ Reembolso hasta 48h antes"
+    },
+    "descripcion": "📗 EDICIÓN ESPECIAL: Camiseta de Portugal de Cristiano Ronaldo."
+  },
+  {
+    "id": "13",
+    "nombre": "Argentina",
+    "marca": "⚠️ Adidas",
+    "color": ["🔵Celeste", "⚪Blanco"],
+    "talla": "👕 L",
+    "estreno": "📅 28/11/2025",
+    "hora": "🕒 19:30 - 22:00",
+    "precios": "💵 100.00",
+    "moneda": "🪙PEN",
+    "stock": "📈 50",
+    "soldOut": true,
+    "popularidad": "⭐ 100",
+    "imagen": "13.jpg",
+    "galeria": [
+      "13.jpg",
+      "13.1.jpg",
+      "13.2.jpg",
+      "13.3.jpg"
+  ],
+    "politicas": {
+      "edad": "👥 Todas las edades",
+      "reembolso": "♻️ Reembolso hasta 48h antes"
+    },
+    "descripcion": "📗 EDICIÓN ESPECIAL: Camiseta de Argentina de Messi."
+  }
+]

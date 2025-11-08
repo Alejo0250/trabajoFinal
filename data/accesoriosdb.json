@@ -1,0 +1,134 @@
+[
+  {
+    "id": "14",
+    "nombre": "Tapete de Yoga",
+    "marca": "✅ Nike",
+    "color": ["⚫Negro"],
+    "estreno": "📅 28/11/2025",
+    "hora": "🕒 19:30 - 22:00",
+    "precios": "💵 15.00",
+    "moneda": "🪙PEN",
+    "stock": "📈 50",
+    "soldOut": true,
+    "popularidad": "⭐ 20",
+    "imagen": "14.jpg",
+    "galeria": [
+      "14.jpg"
+  ],
+    "politicas": {
+      "edad": "👥 Todas las edades",
+      "reembolso": "♻️ Reembolso hasta 48h antes"
+    },
+    "descripcion": "📗 Tapete de Yoga Antitranspirante."
+  }, 
+  {
+    "id": "15",
+    "nombre": "Pelota de Yoga",
+    "marca": "⚠️ Adidas",
+    "color": ["🔵Celeste"],
+    "estreno": "📅 20/05/2025",
+    "hora": "🕒 19:30 - 22:00",
+    "precios": "💵 20.00",
+    "moneda": "🪙PEN",
+    "stock": "📈 100",
+    "soldOut": true,
+    "popularidad": "⭐ 91",
+    "imagen": "15.jpg",
+    "galeria": [
+      "15.jpg"
+  ],
+    "politicas": {
+      "edad": "👥 Todas las edades",
+      "reembolso": "♻️ Reembolso hasta 48h antes"
+    },
+    "descripcion": "📗 Grande y resistente."
+  },
+  {
+    "id": "16",
+    "nombre": "Cuerda",
+    "marca": "⚠️ Adidas",
+    "color": ["🔴Rojo", "⚫Negro"],
+    "estreno": "📅 28/11/2025",
+    "hora": "🕒 19:30 - 22:00",
+    "precios": "💵 80.00",
+    "moneda": "🪙PEN",
+    "stock": "📈 50",
+    "soldOut": true,
+    "popularidad": "⭐ 87",
+    "imagen": "16.jpg",
+    "galeria": [
+      "16.jpg"
+  ],
+    "politicas": {
+      "edad": "👥 Todas las edades",
+      "reembolso": "♻️ Reembolso hasta 48h antes"
+    },
+    "descripcion": "📗 Con 2 metros de largo."
+  },
+  {
+    "id": "17",
+    "nombre": "Mancuernas",
+    "marca": "✅ Nike",
+    "color": ["🟢Verde"],
+    "estreno": "📅 20/05/2025",
+    "hora": "🕒 19:30 - 22:00",
+    "precios": "💵 100.00",
+    "moneda": "🪙PEN",
+    "stock": "📈 100",
+    "soldOut": true,
+    "popularidad": "⭐ 95",
+    "imagen": "17.jpg",
+    "galeria": [
+      "17.jpg"
+  ],
+    "politicas": {
+      "edad": "👥 Todas las edades",
+      "reembolso": "♻️ Reembolso hasta 48h antes"
+    },
+    "descripcion": "📗 Mancuernas con peso ajustable."
+  },
+  {
+    "id": "18",
+    "nombre": "Guantes",
+    "marca": "⚠️ Adidas",
+    "color": ["⚫Negro"],
+    "estreno": "📅 28/11/2025",
+    "hora": "🕒 19:30 - 22:00",
+    "precios": "💵 60.00",
+    "moneda": "🪙PEN",
+    "stock": "📈 50",
+    "soldOut": true,
+    "popularidad": "⭐ 88",
+    "imagen": "18.jpg",
+    "galeria": [
+      "18.jpg"
+  ],
+    "politicas": {
+      "edad": "👥 Todas las edades",
+      "reembolso": "♻️ Reembolso hasta 48h antes"
+    },
+    "descripcion": "📗 Guantes para fútbol."
+  },
+    {
+    "id": "19",
+    "nombre": "Equipo de Entrenamiento - Fútbol",
+    "marca": "⚠️ Adidas",
+    "color": ["🔴Rojo", "🔵Azul", "🟢Verde"],
+    "estreno": "📅 28/11/2025",
+    "hora": "🕒 19:30 - 22:00",
+    "precios": "💵 80.00",
+    "moneda": "🪙PEN",
+    "stock": "📈 50",
+    "soldOut": true,
+    "popularidad": "⭐ 100",
+    "imagen": "19.jpg",
+    "galeria": [
+      "19.jpg"
+  ],
+    "politicas": {
+      "edad": "👥 Todas las edades",
+      "reembolso": "♻️ Reembolso hasta 48h antes"
+    },
+    "descripcion": "📗 Conos, platillos y más."
+  }
+]
