@@ -136,180 +136,64 @@ function App() {
 
   return (
     <div style={{ backgroundColor: "#010e30ff", color: "white", minHeight: "100vh" }}>
-      {/* ENCABEZADO */}
       <header className="flex justify-between items-center p-4">
         <h1 className="text-2xl font-bold text-white">🛍️ Tienda Colección</h1>
       </header>
 
-      {/* CONTENIDO PRINCIPAL */}
       <main className="p-6">
-        <h3
-          className="text-4xl font-bold text-center mb-8 
-                     bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent"
-        >
-          CAMISETAS
-        </h3>
+        <h3 className="text-4xl font-bold text-center mb-8 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">CAMISETAS</h3>
 
-        {/* GRID DE CAMISETAS */}
         <CamisetasGrid camisetas={camisetas} onSelectCamiseta={setSelectedCamiseta} />
 
-        {/* MODAL DETALLES */}
         {selectedCamiseta && (
-          <div
-            className="fixed inset-0 flex items-center justify-center z-50"
-            style={{ backgroundColor: "rgba(0, 0, 0, 0.6)" }}
-            onClick={(e) => {
-              if (e.target === e.currentTarget) setSelectedCamiseta(null);
-            }}
-          >
+          <div className="fixed inset-0 flex items-center justify-center z-50" style={{ backgroundColor: "rgba(0,0,0,0.6)" }} onClick={(e) => { if (e.target === e.currentTarget) setSelectedCamiseta(null); }}>
             <div className="bg-gray-800 rounded-2xl p-8 w-[90%] max-w-5xl max-h-[90vh] shadow-2xl relative overflow-y-auto">
-              {/* Botón de cerrar */}
-              <button
-                onClick={() => setSelectedCamiseta(null)}
-                className="close-btn absolute top-2 right-2 text-red-500 hover:text-white text-2xl font-bold"
-              >
-                &times;
-              </button>
+              <button onClick={() => setSelectedCamiseta(null)} className="absolute top-2 right-2 text-red-500 hover:text-white text-2xl font-bold">&times;</button>
 
-              {/* 🌆 Galería interactiva */}
               <div className="flex flex-col items-center mb-6">
-                <img
-                  src={`imagenes/camisetas/${selectedCamiseta.imagenSeleccionada || selectedCamiseta.imagen}`}
-                  alt={selectedCamiseta.nombre}
-                  className="w-full max-h-[400px] object-contain rounded-lg mb-4 transition-transform duration-300"
-                />
-
+                <img src={`imagenes/camisetas/${selectedCamiseta.imagenSeleccionada || selectedCamiseta.imagen}`} alt={selectedCamiseta.nombre} className="w-full max-h-[400px] object-contain rounded-lg mb-4" />
                 {selectedCamiseta.galeria && selectedCamiseta.galeria.length > 1 && (
                   <div className="flex flex-wrap justify-center gap-3">
                     {selectedCamiseta.galeria.map((img, idx) => (
-                      <img
-                        key={idx}
-                        src={`imagenes/camisetas/${img}`}
-                        alt={`Vista ${idx + 1}`}
-                        className={`w-24 h-24 object-cover rounded-md cursor-pointer border-2 transition-all duration-300 ${
-                          selectedCamiseta.imagenSeleccionada === img
-                            ? "border-blue-500 scale-105"
-                            : "border-gray-600 hover:border-blue-400"
-                        }`}
-                        onClick={() =>
-                          setSelectedCamiseta({
-                            ...selectedCamiseta,
-                            imagenSeleccionada: img,
-                          })
-                        }
-                      />
+                      <img key={idx} src={`imagenes/camisetas/${img}`} alt={`Vista ${idx+1}`} className={`w-24 h-24 object-cover rounded-md cursor-pointer border-2 transition-all duration-300 ${selectedCamiseta.imagenSeleccionada === img ? 'border-blue-500 scale-105' : 'border-gray-600 hover:border-blue-400'}`} onClick={() => setSelectedCamiseta({ ...selectedCamiseta, imagenSeleccionada: img })} />
                     ))}
                   </div>
                 )}
               </div>
 
-              {/* Información */}
               <h3 className="text-2xl font-bold mb-2">{selectedCamiseta.nombre}</h3>
               <p className="text-gray-300 mb-3">{selectedCamiseta.descripcion}</p>
 
-              {/* Etiquetas */}
               <div className="flex flex-wrap gap-2 text-sm mb-3">
-                <span className="bg-red-900 text-red-200 px-3 py-1 rounded-full">
-                  {selectedCamiseta.marca}
-                </span>
-                <span className="bg-green-900 text-green-200 px-3 py-1 rounded-full">
-                  {selectedCamiseta.precios}
-                </span>
-                <span className="bg-yellow-900 text-yellow-200 px-3 py-1 rounded-full">
-                  {selectedCamiseta.moneda}
-                </span>
-                <span className="bg-purple-900 text-purple-200 px-3 py-1 rounded-full">
-                  Talla {selectedCamiseta.talla}
-                </span>
-                <span className="bg-yellow-900 text-yellow-200 px-3 py-1 rounded-full">
-                  Popularidad: {selectedCamiseta.popularidad}
-                </span>
+                <span className="bg-red-900 text-red-200 px-3 py-1 rounded-full">{selectedCamiseta.marca}</span>
+                <span className="bg-green-900 text-green-200 px-3 py-1 rounded-full">{selectedCamiseta.precios}</span>
+                <span className="bg-yellow-900 text-yellow-200 px-3 py-1 rounded-full">{selectedCamiseta.moneda}</span>
+                <span className="bg-purple-900 text-purple-200 px-3 py-1 rounded-full">Talla {selectedCamiseta.talla}</span>
+                <span className="bg-yellow-900 text-yellow-200 px-3 py-1 rounded-full">Popularidad: {selectedCamiseta.popularidad}</span>
               </div>
 
-              {/* Colores */}
-              <div className="mt-3 flex flex-wrap gap-2">
-                {selectedCamiseta.color.map((col, i) => {
-                  let bgColor = "bg-gray-700 text-gray-100";
-                  if (col.includes("Celeste")) bgColor = "bg-blue-900 text-blue-200";
-                  else if (col.includes("Azul")) bgColor = "bg-blue-800 text-blue-300";
-                  else if (col.includes("Dorado")) bgColor = "bg-yellow-700 text-yellow-200";
-                  else if (col.includes("Verde")) bgColor = "bg-green-800 text-green-200";
-                  else if (col.includes("Rojo")) bgColor = "bg-red-800 text-red-200";
-                  else if (col.includes("Rosado")) bgColor = "bg-pink-800 text-pink-200";
-                  else if (col.includes("Negro")) bgColor = "bg-gray-900 text-white";
-                  else if (col.includes("Blanco")) bgColor = "bg-gray-200 text-gray-900";
-
-                  return (
-                    <span key={i} className={`${bgColor} px-3 py-1 rounded-full text-sm font-medium`}>
-                      {col}
-                    </span>
-                  );
-                })}
-              </div>
-
-              {/* Controles de Cantidad y Añadir al Carrito */}
               <div className="mt-6 flex items-center justify-between gap-4">
-                {/* Selector de Cantidad */}
                 <div className="flex items-center gap-2">
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setSelectedCamiseta((prev) => ({
-                        ...prev,
-                        cantidad: Math.max((prev.cantidad || 1) - 1, 1),
-                      }));
-                    }}
-                    className="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 transition-colors"
-                  >
-                    -
-                  </button>
-
-                  <span className="text-white font-medium px-2">
-                    {selectedCamiseta.cantidad || 1}
-                  </span>
-
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setSelectedCamiseta((prev) => ({
-                        ...prev,
-                        cantidad: (prev.cantidad || 1) + 1,
-                      }));
-                    }}
-                    className="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 transition-colors"
-                  >
-                    +
-                  </button>
+                  <button onClick={(e)=>{e.stopPropagation(); setSelectedCamiseta(prev=>({...prev, cantidad: Math.max((prev.cantidad||1)-1,1)}))}} className="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700">-</button>
+                  <span className="text-white font-medium px-2">{selectedCamiseta.cantidad || 1}</span>
+                  <button onClick={(e)=>{e.stopPropagation(); setSelectedCamiseta(prev=>({...prev, cantidad: (prev.cantidad||1)+1}))}} className="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700">+</button>
                 </div>
 
-                {/* Botón Añadir al Carrito */}
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    const carritoActual = JSON.parse(localStorage.getItem("carrito")) || [];
-                    const index = carritoActual.findIndex(
-                      (item) => item.id === selectedCamiseta.id
-                    );
-                    if (index >= 0) {
-                      carritoActual[index].cantidad += selectedCamiseta.cantidad || 1;
+                <button onClick={(e)=>{
+                  e.stopPropagation();
+                  const carritoActual = JSON.parse(localStorage.getItem('carrito')) || [];
+                    const precioLimpio = parseFloat(String(selectedCamiseta.precios || '0').replace(/[^\d.,-]/g, '').replace(/,/g, '.')) || 0;
+                    const cantidadAgregar = Number(selectedCamiseta.cantidad || 1);
+                    const idx = carritoActual.findIndex(item => String(item.id) === String(selectedCamiseta.id));
+                    if (idx >= 0) {
+                      carritoActual[idx].cantidad = (Number(carritoActual[idx].cantidad) || 0) + cantidadAgregar;
+                      carritoActual[idx].precio = precioLimpio;
                     } else {
-                      carritoActual.push({
-                        id: selectedCamiseta.id,
-                        nombre: selectedCamiseta.nombre,
-                        imagen: selectedCamiseta.imagen,
-                        precio: selectedCamiseta.precios,
-                        moneda: selectedCamiseta.moneda,
-                        cantidad: selectedCamiseta.cantidad || 1,
-                      });
+                      carritoActual.push({ id: selectedCamiseta.id, nombre: selectedCamiseta.nombre, imagen: selectedCamiseta.imagen, precio: precioLimpio, moneda: selectedCamiseta.moneda, cantidad: cantidadAgregar });
                     }
-                    localStorage.setItem("carrito", JSON.stringify(carritoActual));
-                    alert(
-                      `¡Has añadido ${selectedCamiseta.cantidad || 1} de ${selectedCamiseta.nombre} al carrito!`);
-                  }}
-                  className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors font-semibold text-lg"
-                >
-                  Añadir al Carrito
-                </button>
+                    localStorage.setItem('carrito', JSON.stringify(carritoActual));
+                    alert(`🛒 Añadiste ${cantidadAgregar} × ${selectedCamiseta.nombre} al carrito`);
+                }} className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors font-semibold text-lg">Añadir al Carrito</button>
               </div>
             </div>
           </div>
