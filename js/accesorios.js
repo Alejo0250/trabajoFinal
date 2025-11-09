@@ -296,8 +296,7 @@ function App() {
                       });
                     }
                     localStorage.setItem("carrito", JSON.stringify(carritoActual));
-                    alert(`¡Has añadido ${selectedAccesorio.cantidad || 1} de ${selectedAccesorio.nombre} al carrito!`
-);
+                    alert(`🛒 Añadiste ${selectedAccesorio.cantidad || 1} × ${selectedAccesorio.nombre} al carrito`);
                   }}
                   className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors font-semibold text-lg"
                 >
