@@ -47,23 +47,115 @@ function Header() {
   );
 }
 
-function CarritoPage() {
-  const [carrito, setCarrito] = React.useState(() => {
-    return JSON.parse(localStorage.getItem("carrito")) || [];
+/* Componente para cada fila del carrito: maneja hooks localmente y notifica cambios al padre */
+function CartItem({ item, index, getImageSrc, parsePrice, onEliminar, onCambiarCantidad }) {
+  const [src, setSrc] = React.useState("");
+
+  React.useEffect(() => {
+    getImageSrc(item, setSrc);
+  }, [item.imagen]);
+
+  const precioNumerico = parsePrice(item.precio);
+  const cantidad = item.cantidad || 1;
+  const itemTotalNumero = precioNumerico * cantidad;
+  const itemTotal = itemTotalNumero.toLocaleString(undefined, {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
   });
 
-  // Eliminar producto por índice (más robusto si ids vienen duplicados o con distinto tipo)
+  return (
+    <div className="grid grid-cols-3 items-center bg-gray-800 p-4 rounded-lg gap-4">
+      <div className="flex items-center gap-4">
+        {src ? (
+          <img
+            src={src}
+            alt={item.nombre}
+            className="w-20 h-20 object-cover rounded transition-opacity duration-500 opacity-100"
+          />
+        ) : (
+          <div className="w-20 h-20 bg-gray-700 rounded animate-pulse" />
+        )}
+
+        <div>
+          <h3 className="font-bold">{item.nombre}</h3>
+          <p>
+            {item.moneda} {typeof item.precio === 'number' ? item.precio.toFixed(2) : item.precio}
+          </p>
+        </div>
+      </div>
+
+      <div className="justify-self-center flex-shrink-0">
+        <div className="bg-green-600 text-white rounded min-w-[140px] h-20 flex flex-col justify-center items-center px-4">
+          <div className="text-xs">Importe</div>
+          <div className="font-bold">{item.moneda} {itemTotal}</div>
+        </div>
+      </div>
+
+      <div className="flex items-center gap-2">
+        <button
+          onClick={() => onCambiarCantidad(-1)}
+          className="px-3 py-1 bg-blue-600 rounded hover:bg-blue-700"
+        >
+          -
+        </button>
+
+        <span>{cantidad}</span>
+
+        <button
+          onClick={() => onCambiarCantidad(1)}
+          className="px-3 py-1 bg-blue-600 rounded hover:bg-blue-700"
+        >
+          +
+        </button>
+
+        <button
+          onClick={onEliminar}
+          className="px-3 py-1 bg-red-600 rounded hover:bg-red-700"
+        >
+          Eliminar
+        </button>
+      </div>
+    </div>
+  );
+}
+
+function CarritoPage() {
+  const [carrito, setCarrito] = React.useState(() => {
+    const raw = JSON.parse(localStorage.getItem("carrito")) || [];
+        // Merge duplicates by id: sum cantidad and normalize precio to number
+        const map = {};
+        raw.forEach((item) => {
+          const id = String(item.id);
+          const precioNum = typeof item.precio === 'number'
+            ? item.precio
+            : Number(String(item.precio || '').replace(/[^\d.,-]/g, '').replace(/,/g, '.')) || 0;
+          const cantidad = item.cantidad || 1;
+
+          if (!map[id]) {
+            map[id] = { ...item, precio: precioNum, cantidad };
+          } else {
+            map[id].cantidad = (map[id].cantidad || 0) + cantidad;
+            // keep the most recent numeric price
+            map[id].precio = precioNum;
+          }
+        });
+
+        return Object.values(map);
+  });
+
+  // Eliminar producto por índice (mantenemos por index en el render)
   const eliminarItem = (index) => {
     const nuevoCarrito = carrito.filter((_, i) => i !== index);
     setCarrito(nuevoCarrito);
     localStorage.setItem("carrito", JSON.stringify(nuevoCarrito));
   };
 
-  // Cambiar cantidad
-  const cambiarCantidad = (id, delta) => {
-    const nuevoCarrito = carrito.map((item) => {
-      if (item.id === id) {
-        return { ...item, cantidad: Math.max(item.cantidad + delta, 1) };
+  // Cambiar cantidad por índice — así actualizamos la UI inmediatamente
+  const cambiarCantidadPorIndex = (index, delta) => {
+    const nuevoCarrito = carrito.map((item, i) => {
+      if (i === index) {
+        const nuevaCantidad = Math.max((item.cantidad || 1) + delta, 1);
+        return { ...item, cantidad: nuevaCantidad };
       }
       return item;
     });
@@ -71,8 +163,8 @@ function CarritoPage() {
     localStorage.setItem("carrito", JSON.stringify(nuevoCarrito));
   };
 
-  // Calcular total
-  const total = carrito.reduce((acc, item) => acc + item.precio * item.cantidad, 0);
+  // Calcular total (usar parsePrice por si hay strings residuales)
+  const total = carrito.reduce((acc, item) => acc + parsePrice(item.precio) * (item.cantidad || 1), 0);
 
   // Preload de imágenes sin parpadeo
   const preloadImage = (src, callback) => {
@@ -102,7 +194,7 @@ function CarritoPage() {
   };
 
   // Parsea un string de precio que puede contener emojis, símbolos o separadores
-  const parsePrice = (priceStr) => {
+  function parsePrice(priceStr) {
     if (typeof priceStr === "number") return priceStr;
     if (!priceStr) return 0;
 
@@ -128,7 +220,7 @@ function CarritoPage() {
 
     const n = parseFloat(cleaned);
     return Number.isNaN(n) ? 0 : n;
-  };
+  }
 
   return (
     <div className="min-h-screen bg-gray-900 text-white">
@@ -141,83 +233,20 @@ function CarritoPage() {
           <p className="text-gray-400">Tu carrito está vacío.</p>
         ) : (
           <div className="flex flex-col gap-4">
-            {carrito.map((item, index) => {
-              const [src, setSrc] = React.useState("");
-
-              React.useEffect(() => {
-                getImageSrc(item, setSrc);
-              }, [item.imagen]);
-
-              // calcular importe por línea usando parsePrice (quita emojis/símbolos)
-              const precioNumerico = parsePrice(item.precio);
-              const itemTotalNumero = precioNumerico * item.cantidad;
-              const itemTotal = itemTotalNumero.toLocaleString(undefined, {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2,
-              });
-
-              return (
-                <div
-                  key={item.id}
-                  className="grid grid-cols-3 items-center bg-gray-800 p-4 rounded-lg gap-4"
-                >
-                  <div className="flex items-center gap-4">
-                    {src ? (
-                      <img
-                        src={src}
-                        alt={item.nombre}
-                        className="w-20 h-20 object-cover rounded transition-opacity duration-500 opacity-100"
-                      />
-                    ) : (
-                      <div className="w-20 h-20 bg-gray-700 rounded animate-pulse" />
-                    )}
-
-                    <div>
-                      <h3 className="font-bold">{item.nombre}</h3>
-                      <p>
-                        {item.moneda} {item.precio}
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Recuadro con el importe por línea, separado y alineado */}
-                  <div className="justify-self-center flex-shrink-0">
-                    <div className="bg-green-600 text-white rounded min-w-[140px] h-20 flex flex-col justify-center items-center px-4">
-                      <div className="text-xs">Importe</div>
-                      <div className="font-bold">{item.moneda} {itemTotal}</div>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center gap-2">
-                    <button
-                      onClick={() => cambiarCantidad(item.id, -1)}
-                      className="px-3 py-1 bg-blue-600 rounded hover:bg-blue-700"
-                    >
-                      -
-                    </button>
-
-                    <span>{item.cantidad}</span>
-
-                    <button
-                      onClick={() => cambiarCantidad(item.id, 1)}
-                      className="px-3 py-1 bg-blue-600 rounded hover:bg-blue-700"
-                    >
-                      +
-                    </button>
-
-                    <button
-                      onClick={() => eliminarItem(index)}
-                      className="px-3 py-1 bg-red-600 rounded hover:bg-red-700"
-                    >
-                      Eliminar
-                    </button>
-                  </div>
-                </div>
-              );
-            })}
+            {carrito.map((item, index) => (
+              <CartItem
+                key={String(item.id) + "-" + index}
+                item={item}
+                index={index}
+                getImageSrc={getImageSrc}
+                parsePrice={parsePrice}
+                onEliminar={() => eliminarItem(index)}
+                onCambiarCantidad={(delta) => cambiarCantidadPorIndex(index, delta)}
+              />
+            ))}
 
             <div className="text-right font-bold text-xl mt-4">
-              Total: {total}
+              Total: {total.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
             </div>
           </div>
         )}
