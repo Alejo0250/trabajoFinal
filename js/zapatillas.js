@@ -7,13 +7,13 @@ function ZapatillasCard({ zapatilla, onSelectZapatilla }) {
     <div
       onClick={() => onSelectZapatilla(zapatilla)}
       className="bg-gray-800 rounded-lg shadow-lg hover:shadow-xl 
-                  transform hover:scale-105 transition-all duration-300 overflow-hidden 
-                  group cursor-pointer w-full"
+                 transform hover:scale-105 transition-all duration-300 overflow-hidden 
+                 group cursor-pointer w-full"
     >
       {/* Contenedor de la imagen principal */}
       <div className="relative overflow-hidden h-64">
         <img
-          src={`imagenes/zapatillas/${zapatilla.imagen}`} // Ruta dinámica
+          src={`imagenes/zapatillas/${zapatilla.imagen}`}
           alt={zapatilla.nombre}
           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
           style={{ zIndex: 1 }}
@@ -26,10 +26,7 @@ function ZapatillasCard({ zapatilla, onSelectZapatilla }) {
 
       {/* Sección inferior */}
       <div className="p-6">
-        <h3
-          className="text-xl font-bold text-white mb-2 
-                     hover:text-blue-400 transition-colors"
-        >
+        <h3 className="text-xl font-bold text-white mb-2 hover:text-blue-400 transition-colors">
           {zapatilla.nombre}
         </h3>
 
@@ -39,14 +36,11 @@ function ZapatillasCard({ zapatilla, onSelectZapatilla }) {
 
         {/* Etiquetas */}
         <div className="flex flex-col gap-3">
-          {/* 🔹 Bloque superior: Marca, Colores y Popularidad */}
           <div className="flex flex-wrap gap-2">
-            {/* Marca */}
             <span className="bg-red-900 text-red-200 px-3 py-1 rounded-full text-xs font-medium">
               {zapatilla.marca}
             </span>
 
-            {/* Colores */}
             {zapatilla.color.map((col, i) => {
               let bgColor = "bg-gray-700 text-gray-100";
               if (col.includes("Celeste")) bgColor = "bg-blue-900 text-blue-200";
@@ -68,7 +62,6 @@ function ZapatillasCard({ zapatilla, onSelectZapatilla }) {
               );
             })}
 
-            {/* Popularidad */}
             <div className="flex items-center bg-yellow-900 px-3 py-1 rounded-full">
               <span className="text-yellow-300 text-sm font-semibold">
                 {zapatilla.popularidad}
@@ -76,7 +69,6 @@ function ZapatillasCard({ zapatilla, onSelectZapatilla }) {
             </div>
           </div>
 
-          {/* 🔹 Bloque inferior: Precio, Moneda y Talla */}
           <div className="flex flex-wrap gap-2 pt-1 border-t border-gray-700">
             <span className="bg-green-900 text-white px-3 py-1 rounded-full text-xs font-medium">
               {zapatilla.precios}
@@ -102,16 +94,18 @@ function ZapatillasGrid({ zapatillas, onSelectZapatilla }) {
   const ultimas = zapatillas.slice(6);
 
   return (
-    <div className="grid grid-cols-3 gap-10 justify-items-center p-10 max-w-[1700px] mx-auto auto-rows-fr">
-      {/* Primeras 6 */}
-      {primeraParte.map((z, i) => (
-        <div key={i} className="w-full h-[470px] flex">
-          <ZapatillasCard zapatilla={z} onSelectZapatilla={onSelectZapatilla} />
-        </div>
-      ))}
+    <div className="p-10 max-w-[1700px] mx-auto space-y-10">
+      {/* Primer bloque: primeras 6 zapatillas */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 justify-items-center auto-rows-fr">
+        {primeraParte.map((z, i) => (
+          <div key={i} className="w-full h-[470px] flex">
+            <ZapatillasCard zapatilla={z} onSelectZapatilla={onSelectZapatilla} />
+          </div>
+        ))}
+      </div>
 
-      {/* Fila final */}
-      <div className="col-span-3 flex justify-center gap-10 w-full">
+      {/* Última fila: 2 últimas zapatillas */}
+      <div className="flex justify-center gap-10 w-full flex-wrap">
         {ultimas.map((z, i) => (
           <div key={i + 6} className="flex-1 max-w-[800px]">
             <ZapatillasCard zapatilla={z} onSelectZapatilla={onSelectZapatilla} />
@@ -142,9 +136,7 @@ function App() {
       </header>
 
       <main className="p-6">
-        <h3
-          className="text-4xl font-bold text-center mb-8 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent"
-        >
+        <h3 className="text-4xl font-bold text-center mb-8 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
           ZAPATILLAS
         </h3>
 
@@ -188,10 +180,7 @@ function App() {
                             : "border-gray-600 hover:border-blue-400"
                         }`}
                         onClick={() =>
-                          setSelectedZapatilla({
-                            ...selectedZapatilla,
-                            imagenSeleccionada: img,
-                          })
+                          setSelectedZapatilla({ ...selectedZapatilla, imagenSeleccionada: img })
                         }
                       />
                     ))}
@@ -213,10 +202,14 @@ function App() {
 
               {/* Controles */}
               <div className="mt-6 flex items-center justify-between gap-4">
-                {/* Cantidad */}
                 <div className="flex items-center gap-2">
                   <button
-                    onClick={() => setSelectedZapatilla((prev) => ({ ...prev, cantidad: Math.max((prev.cantidad || 1) - 1, 1) }))}
+                    onClick={() =>
+                      setSelectedZapatilla((prev) => ({
+                        ...prev,
+                        cantidad: Math.max((prev.cantidad || 1) - 1, 1),
+                      }))
+                    }
                     className="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700"
                   >
                     -
@@ -225,18 +218,23 @@ function App() {
                   <span className="text-white font-medium px-2">{selectedZapatilla.cantidad || 1}</span>
 
                   <button
-                    onClick={() => setSelectedZapatilla((prev) => ({ ...prev, cantidad: (prev.cantidad || 1) + 1 }))}
+                    onClick={() =>
+                      setSelectedZapatilla((prev) => ({
+                        ...prev,
+                        cantidad: (prev.cantidad || 1) + 1,
+                      }))
+                    }
                     className="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700"
                   >
                     +
                   </button>
                 </div>
 
-                {/* Añadir al carrito */}
                 <button
                   onClick={() => {
-                        const carritoActual = JSON.parse(localStorage.getItem("carrito")) || [];
-                        const precioLimpio = parseFloat(String(selectedZapatilla.precios || "0").replace(/[^\d.,-]/g, "").replace(/,/g, '.')) || 0;
+                    const carritoActual = JSON.parse(localStorage.getItem("carrito")) || [];
+                    const precioLimpio =
+                      parseFloat(String(selectedZapatilla.precios || "0").replace(/[^\d.,-]/g, "").replace(/,/g, ".")) || 0;
                     const cantidadAgregar = selectedZapatilla.cantidad || 1;
 
                     const idx = carritoActual.findIndex((item) => String(item.id) === String(selectedZapatilla.id));
