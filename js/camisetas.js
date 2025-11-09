@@ -8,12 +8,12 @@ function CamisetasCard({ camisetas, onSelectCamiseta }) {
       onClick={() => onSelectCamiseta(camisetas)}
       className="bg-gray-800 rounded-lg shadow-lg hover:shadow-xl 
                   transform hover:scale-105 transition-all duration-300 overflow-hidden 
-                  group cursor-pointer w-full"
+                  group cursor-pointer w-full flex flex-col h-full"
     >
       {/* Contenedor de la imagen principal */}
       <div className="relative overflow-hidden h-64">
         <img
-          src={`imagenes/camisetas/${camisetas.imagen}`} // Ruta dinámica
+          src={`imagenes/camisetas/${camisetas.imagen}`}
           alt={camisetas.nombre}
           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
           style={{ zIndex: 1 }}
@@ -25,7 +25,7 @@ function CamisetasCard({ camisetas, onSelectCamiseta }) {
       </div>
 
       {/* Sección inferior */}
-      <div className="p-6">
+      <div className="p-6 flex flex-col justify-between flex-grow">
         <h3
           className="text-xl font-bold text-white mb-2 
                      hover:text-blue-400 transition-colors"
@@ -33,20 +33,18 @@ function CamisetasCard({ camisetas, onSelectCamiseta }) {
           {camisetas.nombre}
         </h3>
 
-        <p className="text-gray-300 text-sm mb-4 leading-relaxed min-h-[48px]">
+        {/* ✅ Ajuste: altura mínima solo donde hace falta */}
+        <p className="text-gray-300 text-sm mb-4 leading-relaxed min-h-[40px] sm:min-h-[48px] lg:min-h-0">
           {camisetas.descripcion}
         </p>
 
         {/* Etiquetas */}
-        <div className="flex flex-col gap-3">
-          {/* 🔹 Bloque superior: Marca, Colores y Popularidad */}
+        <div className="flex flex-col gap-3 mt-auto">
           <div className="flex flex-wrap gap-2">
-            {/* Marca */}
             <span className="bg-red-900 text-red-200 px-3 py-1 rounded-full text-xs font-medium">
               {camisetas.marca}
             </span>
 
-            {/* Colores */}
             {camisetas.color.map((col, i) => {
               let bgColor = "bg-gray-700 text-gray-100";
               if (col.includes("Celeste")) bgColor = "bg-blue-900 text-blue-200";
@@ -65,7 +63,6 @@ function CamisetasCard({ camisetas, onSelectCamiseta }) {
               );
             })}
 
-            {/* Popularidad */}
             <div className="flex items-center bg-yellow-900 px-3 py-1 rounded-full">
               <span className="text-yellow-300 text-sm font-semibold">
                 {camisetas.popularidad}
@@ -73,7 +70,6 @@ function CamisetasCard({ camisetas, onSelectCamiseta }) {
             </div>
           </div>
 
-          {/* 🔹 Bloque inferior: Precio, Moneda y Talla */}
           <div className="flex flex-wrap gap-2 pt-1 border-t border-gray-700">
             <span className="bg-green-900 text-white px-3 py-1 rounded-full text-xs font-medium">
               {camisetas.precios}
@@ -95,23 +91,25 @@ function CamisetasCard({ camisetas, onSelectCamiseta }) {
 
 /* 🧱 GRID GENERAL: organiza las tarjetas en filas y columnas */
 function CamisetasGrid({ camisetas, onSelectCamiseta }) {
-  // 🟦 En este caso solo hay 5 camisetas
-  const primeraParte = camisetas.slice(0, 3); // 3 PRIMERAS CAMISETAS
-  const ultimas = camisetas.slice(3); // 2 ULTIMAS CAMISETAS
+  const primeraParte = camisetas.slice(0, 3);
+  const ultimas = camisetas.slice(3);
 
   return (
-    <div className="grid grid-cols-3 gap-10 justify-items-center p-10 max-w-[1700px] mx-auto auto-rows-fr">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 justify-items-center p-10 max-w-[1700px] mx-auto items-stretch">
       {/* 🔹 Fila 1 → 3 camisetas */}
       {primeraParte.map((c, i) => (
-        <div key={i} className="w-full h-[470px] flex">
+        <div key={i} className="w-full h-full flex">
           <CamisetasCard camisetas={c} onSelectCamiseta={onSelectCamiseta} />
         </div>
       ))}
 
       {/* 🔹 Fila 2 → centrada con las 2 restantes */}
-      <div className="col-span-3 flex justify-center gap-10 w-full">
+      <div className="col-span-1 sm:col-span-2 lg:col-span-3 flex flex-wrap justify-center gap-10 w-full">
         {ultimas.map((c, i) => (
-          <div key={i + 3} className="flex-1 max-w-[500px]">
+          <div
+            key={i + 3}
+            className="flex-1 min-w-[250px] max-w-[500px] w-full sm:w-[45%] lg:w-[40%]"
+          >
             <CamisetasCard camisetas={c} onSelectCamiseta={onSelectCamiseta} />
           </div>
         ))}
@@ -120,13 +118,11 @@ function CamisetasGrid({ camisetas, onSelectCamiseta }) {
   );
 }
 
-
 /* 🌙 Componente principal solo con modo oscuro fijo */
 function App() {
   const [camisetas, setCamisetas] = React.useState([]);
-  const [selectedCamiseta, setSelectedCamiseta] = React.useState(null); // ✅ para el modal
+  const [selectedCamiseta, setSelectedCamiseta] = React.useState(null);
 
-  // Cargar JSON
   React.useEffect(() => {
     fetch(CAMISETAS_URL)
       .then((res) => res.json())
@@ -141,21 +137,54 @@ function App() {
       </header>
 
       <main className="p-6">
-        <h3 className="text-4xl font-bold text-center mb-8 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">CAMISETAS</h3>
+        <h3 className="text-4xl font-bold text-center mb-8 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+          CAMISETAS
+        </h3>
 
         <CamisetasGrid camisetas={camisetas} onSelectCamiseta={setSelectedCamiseta} />
 
+        {/* 🔹 Modal (sin cambios estructurales) */}
         {selectedCamiseta && (
-          <div className="fixed inset-0 flex items-center justify-center z-50" style={{ backgroundColor: "rgba(0,0,0,0.6)" }} onClick={(e) => { if (e.target === e.currentTarget) setSelectedCamiseta(null); }}>
+          <div
+            className="fixed inset-0 flex items-center justify-center z-50"
+            style={{ backgroundColor: "rgba(0,0,0,0.6)" }}
+            onClick={(e) => {
+              if (e.target === e.currentTarget) setSelectedCamiseta(null);
+            }}
+          >
             <div className="bg-gray-800 rounded-2xl p-8 w-[90%] max-w-5xl max-h-[90vh] shadow-2xl relative overflow-y-auto">
-              <button onClick={() => setSelectedCamiseta(null)} className="absolute top-2 right-2 text-red-500 hover:text-white text-2xl font-bold">&times;</button>
+              <button
+                onClick={() => setSelectedCamiseta(null)}
+                className="absolute top-2 right-2 text-red-500 hover:text-white text-2xl font-bold"
+              >
+                &times;
+              </button>
 
               <div className="flex flex-col items-center mb-6">
-                <img src={`imagenes/camisetas/${selectedCamiseta.imagenSeleccionada || selectedCamiseta.imagen}`} alt={selectedCamiseta.nombre} className="w-full max-h-[400px] object-contain rounded-lg mb-4" />
+                <img
+                  src={`imagenes/camisetas/${selectedCamiseta.imagenSeleccionada || selectedCamiseta.imagen}`}
+                  alt={selectedCamiseta.nombre}
+                  className="w-full max-h-[400px] object-contain rounded-lg mb-4"
+                />
                 {selectedCamiseta.galeria && selectedCamiseta.galeria.length > 1 && (
                   <div className="flex flex-wrap justify-center gap-3">
                     {selectedCamiseta.galeria.map((img, idx) => (
-                      <img key={idx} src={`imagenes/camisetas/${img}`} alt={`Vista ${idx+1}`} className={`w-24 h-24 object-cover rounded-md cursor-pointer border-2 transition-all duration-300 ${selectedCamiseta.imagenSeleccionada === img ? 'border-blue-500 scale-105' : 'border-gray-600 hover:border-blue-400'}`} onClick={() => setSelectedCamiseta({ ...selectedCamiseta, imagenSeleccionada: img })} />
+                      <img
+                        key={idx}
+                        src={`imagenes/camisetas/${img}`}
+                        alt={`Vista ${idx + 1}`}
+                        className={`w-24 h-24 object-cover rounded-md cursor-pointer border-2 transition-all duration-300 ${
+                          selectedCamiseta.imagenSeleccionada === img
+                            ? "border-blue-500 scale-105"
+                            : "border-gray-600 hover:border-blue-400"
+                        }`}
+                        onClick={() =>
+                          setSelectedCamiseta({
+                            ...selectedCamiseta,
+                            imagenSeleccionada: img,
+                          })
+                        }
+                      />
                     ))}
                   </div>
                 )}
@@ -165,35 +194,90 @@ function App() {
               <p className="text-gray-300 mb-3">{selectedCamiseta.descripcion}</p>
 
               <div className="flex flex-wrap gap-2 text-sm mb-3">
-                <span className="bg-red-900 text-red-200 px-3 py-1 rounded-full">{selectedCamiseta.marca}</span>
-                <span className="bg-green-900 text-green-200 px-3 py-1 rounded-full">{selectedCamiseta.precios}</span>
-                <span className="bg-yellow-900 text-yellow-200 px-3 py-1 rounded-full">{selectedCamiseta.moneda}</span>
-                <span className="bg-purple-900 text-purple-200 px-3 py-1 rounded-full">Talla {selectedCamiseta.talla}</span>
-                <span className="bg-yellow-900 text-yellow-200 px-3 py-1 rounded-full">Popularidad: {selectedCamiseta.popularidad}</span>
+                <span className="bg-red-900 text-red-200 px-3 py-1 rounded-full">
+                  {selectedCamiseta.marca}
+                </span>
+                <span className="bg-green-900 text-green-200 px-3 py-1 rounded-full">
+                  {selectedCamiseta.precios}
+                </span>
+                <span className="bg-yellow-900 text-yellow-200 px-3 py-1 rounded-full">
+                  {selectedCamiseta.moneda}
+                </span>
+                <span className="bg-purple-900 text-purple-200 px-3 py-1 rounded-full">
+                  Talla {selectedCamiseta.talla}
+                </span>
+                <span className="bg-yellow-900 text-yellow-200 px-3 py-1 rounded-full">
+                  Popularidad: {selectedCamiseta.popularidad}
+                </span>
               </div>
 
-              <div className="mt-6 flex items-center justify-between gap-4">
+              {/* Controles de cantidad y botón de carrito */}
+              <div className="mt-6 flex items-center justify-between gap-4 flex-wrap">
                 <div className="flex items-center gap-2">
-                  <button onClick={(e)=>{e.stopPropagation(); setSelectedCamiseta(prev=>({...prev, cantidad: Math.max((prev.cantidad||1)-1,1)}))}} className="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700">-</button>
-                  <span className="text-white font-medium px-2">{selectedCamiseta.cantidad || 1}</span>
-                  <button onClick={(e)=>{e.stopPropagation(); setSelectedCamiseta(prev=>({...prev, cantidad: (prev.cantidad||1)+1}))}} className="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700">+</button>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setSelectedCamiseta((prev) => ({
+                        ...prev,
+                        cantidad: Math.max((prev.cantidad || 1) - 1, 1),
+                      }));
+                    }}
+                    className="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700"
+                  >
+                    -
+                  </button>
+                  <span className="text-white font-medium px-2">
+                    {selectedCamiseta.cantidad || 1}
+                  </span>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setSelectedCamiseta((prev) => ({
+                        ...prev,
+                        cantidad: (prev.cantidad || 1) + 1,
+                      }));
+                    }}
+                    className="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700"
+                  >
+                    +
+                  </button>
                 </div>
 
-                <button onClick={(e)=>{
-                  e.stopPropagation();
-                  const carritoActual = JSON.parse(localStorage.getItem('carrito')) || [];
-                    const precioLimpio = parseFloat(String(selectedCamiseta.precios || '0').replace(/[^\d.,-]/g, '').replace(/,/g, '.')) || 0;
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    const carritoActual = JSON.parse(localStorage.getItem("carrito")) || [];
+                    const precioLimpio =
+                      parseFloat(
+                        String(selectedCamiseta.precios || "0")
+                          .replace(/[^\d.,-]/g, "")
+                          .replace(/,/g, ".")
+                      ) || 0;
                     const cantidadAgregar = Number(selectedCamiseta.cantidad || 1);
-                    const idx = carritoActual.findIndex(item => String(item.id) === String(selectedCamiseta.id));
+                    const idx = carritoActual.findIndex(
+                      (item) => String(item.id) === String(selectedCamiseta.id)
+                    );
                     if (idx >= 0) {
-                      carritoActual[idx].cantidad = (Number(carritoActual[idx].cantidad) || 0) + cantidadAgregar;
+                      carritoActual[idx].cantidad =
+                        (Number(carritoActual[idx].cantidad) || 0) + cantidadAgregar;
                       carritoActual[idx].precio = precioLimpio;
                     } else {
-                      carritoActual.push({ id: selectedCamiseta.id, nombre: selectedCamiseta.nombre, imagen: selectedCamiseta.imagen, precio: precioLimpio, moneda: selectedCamiseta.moneda, cantidad: cantidadAgregar });
+                      carritoActual.push({
+                        id: selectedCamiseta.id,
+                        nombre: selectedCamiseta.nombre,
+                        imagen: selectedCamiseta.imagen,
+                        precio: precioLimpio,
+                        moneda: selectedCamiseta.moneda,
+                        cantidad: cantidadAgregar,
+                      });
                     }
-                    localStorage.setItem('carrito', JSON.stringify(carritoActual));
+                    localStorage.setItem("carrito", JSON.stringify(carritoActual));
                     alert(`🛒 Añadiste ${cantidadAgregar} × ${selectedCamiseta.nombre} al carrito`);
-                }} className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors font-semibold text-lg">Añadir al Carrito</button>
+                  }}
+                  className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors font-semibold text-lg"
+                >
+                  Añadir al Carrito
+                </button>
               </div>
             </div>
           </div>
