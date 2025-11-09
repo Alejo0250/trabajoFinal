@@ -91,30 +91,23 @@ function AccesoriosCard({ accesorios, onSelectAccesorio }) {
 
 /* 🧱 GRID GENERAL: organiza las tarjetas en filas y columnas */
 function AccesoriosGrid({ accesorios, onSelectAccesorio }) {
-  // 🟦 En este caso solo hay 5 accesorios
-  const primeraParte = accesorios.slice(0, 3); // 3 PRIMEROS ACCESORIOS
-  const ultimas = accesorios.slice(3); // 2 ULTIMOS ACCESORIOS
-
   return (
-    <div className="grid grid-cols-3 gap-10 justify-items-center p-10 max-w-[1700px] mx-auto auto-rows-fr">
-      {/* 🔹 Fila 1 → 3 accesorios */}
-      {primeraParte.map((c, i) => (
-        <div key={i} className="w-full h-[470px] flex">
-          <AccesoriosCard accesorios={c} onSelectAccesorio={onSelectAccesorio} />
+    <div
+      className="
+        grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3
+        gap-10 justify-items-center p-10 max-w-[1700px] mx-auto
+        auto-rows-fr items-stretch
+      "
+    >
+      {accesorios.map((item, i) => (
+        <div key={i} className="w-full h-full flex">
+          <AccesoriosCard accesorios={item} onSelectAccesorio={onSelectAccesorio} />
         </div>
       ))}
-
-      {/* 🔹 Fila 2 → centrada con las 2 restantes */}
-      <div className="col-span-3 flex justify-center gap-10 w-full">
-        {ultimas.map((c, i) => (
-          <div key={i + 3} className="flex-1 max-w-[500px]">
-            <AccesoriosCard accesorios={c} onSelectAccesorio={onSelectAccesorio} />
-          </div>
-        ))}
-      </div>
     </div>
   );
 }
+
 
 
 /* 🌙 Componente principal solo con modo oscuro fijo */
