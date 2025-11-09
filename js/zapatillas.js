@@ -15,7 +15,7 @@ function ZapatillasCard({ zapatilla, onSelectZapatilla }) {
         <img
           src={`imagenes/zapatillas/${zapatilla.imagen}`} // Ruta dinámica
           alt={zapatilla.nombre}
-          className="w-full h-full object-cover group-hover:scale-120 transition-transform duration-300"
+          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
           style={{ zIndex: 1 }}
         />
         <div
@@ -136,25 +136,19 @@ function App() {
   }, []);
 
   return (
-    <div
-      style={{ backgroundColor: "#010e30ff", color: "white", minHeight: "100vh" }}
-    >
+    <div style={{ backgroundColor: "#010e30ff", color: "white", minHeight: "100vh" }}>
       <header className="flex justify-between items-center p-4">
         <h1 className="text-2xl font-bold text-white">🛍️ Tienda Colección</h1>
       </header>
 
       <main className="p-6">
         <h3
-          className="text-4xl font-bold text-center mb-8 
-                     bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent"
+          className="text-4xl font-bold text-center mb-8 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent"
         >
           ZAPATILLAS
         </h3>
 
-        <ZapatillasGrid
-          zapatillas={zapatillas}
-          onSelectZapatilla={setSelectedZapatilla}
-        />
+        <ZapatillasGrid zapatillas={zapatillas} onSelectZapatilla={setSelectedZapatilla} />
 
         {/* MODAL */}
         {selectedZapatilla && (
@@ -206,29 +200,15 @@ function App() {
               </div>
 
               {/* Info */}
-              <h3 className="text-2xl font-bold mb-2">
-                {selectedZapatilla.nombre}
-              </h3>
-              <p className="text-gray-300 mb-3">
-                {selectedZapatilla.descripcion}
-              </p>
+              <h3 className="text-2xl font-bold mb-2">{selectedZapatilla.nombre}</h3>
+              <p className="text-gray-300 mb-3">{selectedZapatilla.descripcion}</p>
 
               <div className="flex flex-wrap gap-2 text-sm mb-3">
-                <span className="bg-red-900 text-red-200 px-3 py-1 rounded-full">
-                  {selectedZapatilla.marca}
-                </span>
-                <span className="bg-green-900 text-green-200 px-3 py-1 rounded-full">
-                  {selectedZapatilla.precios}
-                </span>
-                <span className="bg-yellow-900 text-yellow-200 px-3 py-1 rounded-full">
-                  {selectedZapatilla.moneda}
-                </span>
-                <span className="bg-purple-900 text-purple-200 px-3 py-1 rounded-full">
-                  Talla {selectedZapatilla.talla}
-                </span>
-                <span className="bg-yellow-900 text-yellow-200 px-3 py-1 rounded-full">
-                  Popularidad: {selectedZapatilla.popularidad}
-                </span>
+                <span className="bg-red-900 text-red-200 px-3 py-1 rounded-full">{selectedZapatilla.marca}</span>
+                <span className="bg-green-900 text-green-200 px-3 py-1 rounded-full">{selectedZapatilla.precios}</span>
+                <span className="bg-yellow-900 text-yellow-200 px-3 py-1 rounded-full">{selectedZapatilla.moneda}</span>
+                <span className="bg-purple-900 text-purple-200 px-3 py-1 rounded-full">Talla {selectedZapatilla.talla}</span>
+                <span className="bg-yellow-900 text-yellow-200 px-3 py-1 rounded-full">Popularidad: {selectedZapatilla.popularidad}</span>
               </div>
 
               {/* Controles */}
@@ -236,28 +216,16 @@ function App() {
                 {/* Cantidad */}
                 <div className="flex items-center gap-2">
                   <button
-                    onClick={() =>
-                      setSelectedZapatilla((prev) => ({
-                        ...prev,
-                        cantidad: Math.max((prev.cantidad || 1) - 1, 1),
-                      }))
-                    }
+                    onClick={() => setSelectedZapatilla((prev) => ({ ...prev, cantidad: Math.max((prev.cantidad || 1) - 1, 1) }))}
                     className="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700"
                   >
                     -
                   </button>
 
-                  <span className="text-white font-medium px-2">
-                    {selectedZapatilla.cantidad || 1}
-                  </span>
+                  <span className="text-white font-medium px-2">{selectedZapatilla.cantidad || 1}</span>
 
                   <button
-                    onClick={() =>
-                      setSelectedZapatilla((prev) => ({
-                        ...prev,
-                        cantidad: (prev.cantidad || 1) + 1,
-                      }))
-                    }
+                    onClick={() => setSelectedZapatilla((prev) => ({ ...prev, cantidad: (prev.cantidad || 1) + 1 }))}
                     className="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700"
                   >
                     +
@@ -267,30 +235,26 @@ function App() {
                 {/* Añadir al carrito */}
                 <button
                   onClick={() => {
-                    const carritoActual =
-                      JSON.parse(localStorage.getItem("carrito")) || [];
+                        const carritoActual = JSON.parse(localStorage.getItem("carrito")) || [];
+                        const precioLimpio = parseFloat(String(selectedZapatilla.precios || "0").replace(/[^\d.,-]/g, "").replace(/,/g, '.')) || 0;
+                    const cantidadAgregar = selectedZapatilla.cantidad || 1;
 
-                    const precioLimpio = parseFloat(
-                      (selectedZapatilla.precios || "0").replace(/[^\d.]/g, "")
-                    );
-
-                    const nuevoItem = {
-                      id: selectedZapatilla.id,
-                      nombre: selectedZapatilla.nombre,
-                      imagen: selectedZapatilla.imagen,
-                      precio: precioLimpio,
-                      moneda: selectedZapatilla.moneda,
-                      cantidad: selectedZapatilla.cantidad || 1,
-                    };
-
-                    carritoActual.push(nuevoItem);
+                    const idx = carritoActual.findIndex((item) => String(item.id) === String(selectedZapatilla.id));
+                    if (idx >= 0) {
+                      carritoActual[idx].cantidad = (carritoActual[idx].cantidad || 0) + cantidadAgregar;
+                      carritoActual[idx].precio = precioLimpio;
+                    } else {
+                      carritoActual.push({
+                        id: selectedZapatilla.id,
+                        nombre: selectedZapatilla.nombre,
+                        imagen: selectedZapatilla.imagen,
+                        precio: precioLimpio,
+                        moneda: selectedZapatilla.moneda,
+                        cantidad: cantidadAgregar,
+                      });
+                    }
                     localStorage.setItem("carrito", JSON.stringify(carritoActual));
-
-                    alert(
-                      `🛒 Añadiste ${
-                        selectedZapatilla.cantidad || 1
-                      } × ${selectedZapatilla.nombre} al carrito`
-                    );
+                    alert(`🛒 Añadiste ${cantidadAgregar} × ${selectedZapatilla.nombre} al carrito`);
                   }}
                   className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors font-semibold text-lg"
                 >
